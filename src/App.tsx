@@ -1,19 +1,17 @@
 import { ThemeProvider } from "styled-components";
+import { BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./styles/global";
 import { defaultTheme } from "./styles/themes/default";
+import { Router } from "./Router";
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
 
-      <h1>Coffee Delivery</h1>
-      <button>Coffee Delivery</button>
-      <input type="text" />
-      <textarea name=""></textarea>
-      <select name="" id="">
-        <option value="">Coffee Delivery</option>
-      </select>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
