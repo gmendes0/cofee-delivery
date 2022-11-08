@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
@@ -37,7 +38,7 @@ export const LocationContainer = styled.span`
   }
 `;
 
-export const CartButton = styled.button`
+export const CartButton = styled(Link)`
   border: 0;
   line-height: 0;
   padding: 0.5rem;

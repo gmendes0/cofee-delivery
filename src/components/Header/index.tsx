@@ -12,7 +12,7 @@ export function Header() {
           <MapPin weight="fill" /> Umuarama, PR
         </LocationContainer>
 
-        <CartButton type="button">
+        <CartButton to="/cart" title="carrinho de compras">
           <ShoppingCart weight="fill" />
         </CartButton>
       </nav>
