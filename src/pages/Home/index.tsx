@@ -1,12 +1,14 @@
 import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react";
 
 import coverSVG from "../../assets/cover.png";
+import { CoffeeCard } from "./components/CoffeeCard";
 import {
   Badge,
   BadgesContainer,
+  CoffeeListContainer,
   Cover,
   CoverContainer,
-  HomeContainer,
+  MainContainer,
   TitleContainer,
 } from "./styles";
 
@@ -46,6 +48,16 @@ export function Home() {
           <Cover src={coverSVG} alt="" />
         </div>
       </CoverContainer>
+
+      <MainContainer>
+        <h2>Nossos cafés</h2>
+
+        <CoffeeListContainer>
+          {[...new Array(50)].map((e, key) => (
+            <CoffeeCard n={key} />
+          ))}
+        </CoffeeListContainer>
+      </MainContainer>
     </>
   );
 }

@@ -6,7 +6,7 @@ export const HomeContainer = styled.div`
 `;
 
 export const CoverContainer = styled.div`
-  width: 100vw;
+  width: 100%;
 
   background-image: url("/background.png");
   background-size: cover;
@@ -55,27 +55,6 @@ export const BadgesContainer = styled.div`
   gap: 1.25rem 0;
 
   margin: 4.125rem auto 0;
-
-  > span {
-    /* display: flex;
-    align-items: center;
-    gap: 0.75rem;
-
-    font-weight: 400;
-    font-size: 1rem;
-    color: ${(props) => props.theme["gray-600"]};
-
-    svg {
-      width: 1rem;
-      height: 1rem;
-      box-sizing: content-box;
-
-      padding: 0.5rem;
-      background-color: ${(props) => props.theme["yellow-700"]};
-      border-radius: 50%;
-      color: ${(props) => props.theme.white};
-    } */
-  }
 `;
 
 /**
@@ -112,4 +91,28 @@ export const Badge = styled.span<BadgeProps>`
     border-radius: 50%;
     color: ${(props) => props.theme.white};
   }
+`;
+
+export const MainContainer = styled.main`
+  width: 100%;
+  max-width: 1120px;
+  margin: 2rem auto 0;
+  /* padding: 3rem; */
+
+  h2 {
+    font-family: "Baloo 2", sans-serif;
+    font-size: 2rem;
+    color: ${(props) => props.theme["gray-700"]};
+  }
+`;
+
+export const CoffeeListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    256px
+  ); // auto-fill tenta preencher o espaço com quantos items der
+  gap: 20px 32px;
+  justify-content: center;
+  padding: 2.125rem 0;
 `;

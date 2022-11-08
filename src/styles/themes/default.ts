@@ -8,11 +8,11 @@ export const defaultTheme = {
   "purple-700": "#4b2995",
 
   "gray-50": "#fafafa",
-  "gray-100": "#f3f2f2",
+  "gray-100": "#f3f2f2", // Base/Card
   "gray-200": "#ededed",
-  "gray-300": "#e6e5e5",
+  "gray-300": "#e6e5e5", // Base/Button
   "gray-400": "#d7d5d5",
-  "gray-500": "#8d8686",
+  "gray-500": "#8d8686", // Base/Label
   "gray-600": "#574f4d", // Base/Text
   "gray-700": "#403937", // Base/Subtitle
   "gray-800": "#272221", // Base/Title

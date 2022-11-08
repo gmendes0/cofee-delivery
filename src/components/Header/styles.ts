@@ -45,6 +45,11 @@ export const CartButton = styled.button`
   background-color: ${(props) => props.theme["yellow-200"]};
   border-radius: 6px;
   cursor: pointer;
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
 
   svg {
     width: 1.375rem;
