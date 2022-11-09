@@ -19,14 +19,22 @@ export const CoverContainer = styled.div`
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    padding: 92px 0;
+    padding: 5.75rem 0;
+
+    @media screen and (max-width: 1024px) {
+      padding: 5.75rem 3rem;
+    }
   }
 `;
 
 export const Cover = styled.img`
-  margin-left: 77px;
+  /* margin-left: 77px; */
   width: 476px;
   height: 360px;
+
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -47,31 +55,28 @@ export const TitleContainer = styled.div`
     font-weight: 400;
     color: ${(props) => props.theme["gray-700"]};
   }
+
+  @media screen and (max-width: 1024px) {
+    text-align: center;
+  }
 `;
 
 export const BadgesContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, 18.375rem);
   gap: 1.25rem 0;
+  justify-content: center;
+
+  width: 100%;
 
   margin: 4.125rem auto 0;
+
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    max-width: calc((18.375rem + 1.25rem) * 2);
+  }
 `;
 
-/**
- * 'as const' diz ao TS que o tipo dos valores é exatamente o que está escrito e nao uma string qualquer
- */
-const badgeVariantColor = {
-  brown: "yellow-700",
-  yellow: "yellow-500",
-  gray: "gray-600",
-  purple: "purple-500",
-} as const;
-
-interface BadgeProps {
-  variant: keyof typeof badgeVariantColor;
-}
-
-export const Badge = styled.span<BadgeProps>`
+export const Badge = styled.span`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -79,30 +84,21 @@ export const Badge = styled.span<BadgeProps>`
   font-weight: 400;
   font-size: 1rem;
   color: ${(props) => props.theme["gray-600"]};
-
-  svg {
-    width: 1rem;
-    height: 1rem;
-    box-sizing: content-box;
-
-    padding: 0.5rem;
-    background-color: ${(props) =>
-      props.theme[badgeVariantColor[props.variant]]};
-    border-radius: 50%;
-    color: ${(props) => props.theme.white};
-  }
 `;
 
 export const MainContainer = styled.main`
   width: 100%;
   max-width: 1120px;
   margin: 2rem auto 0;
-  /* padding: 3rem; */
 
   h2 {
     font-family: "Baloo 2", sans-serif;
     font-size: 2rem;
     color: ${(props) => props.theme["gray-700"]};
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 0 3rem;
   }
 `;
 

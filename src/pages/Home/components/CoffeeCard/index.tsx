@@ -1,12 +1,13 @@
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { QuantityInputGroup } from "../../../../components/QuantityInputGroup";
 import {
   CardImageContainer,
   CoffeeCardContainer,
   CoffeeCardFooter,
   CoffeeCardTag,
-  QuantityButton,
-  QuantityInput,
-  QuantityInputGroup,
+  // QuantityButton,
+  // QuantityInput,
+  // QuantityInputGroup,
 } from "./styles";
 
 interface CoffeeCardProps {
@@ -36,7 +37,7 @@ export function CoffeeCard({ n }: CoffeeCardProps) {
         </p>
         {/* <input type="number" min={1} step={1} /> */}
 
-        <QuantityInputGroup>
+        {/* <QuantityInputGroup>
           <QuantityButton>
             <Minus weight="bold" />
           </QuantityButton>
@@ -44,7 +45,8 @@ export function CoffeeCard({ n }: CoffeeCardProps) {
           <QuantityButton>
             <Plus weight="bold" />
           </QuantityButton>
-        </QuantityInputGroup>
+        </QuantityInputGroup> */}
+        <QuantityInputGroup />
 
         <button>
           <ShoppingCart weight="fill" />

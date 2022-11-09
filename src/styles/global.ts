@@ -20,4 +20,10 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background: ${(props) => props.theme["gray-50"]}
   }
+
+  html {
+    @media screen and (max-width: 768px) {
+      font-size: 75%;
+    }
+  }
 `;
