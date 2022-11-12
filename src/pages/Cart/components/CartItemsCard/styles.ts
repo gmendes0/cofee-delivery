@@ -8,6 +8,7 @@ export const CartAside = styled.aside`
 
 export const CartAsideCard = styled.div`
   width: 100%;
+  min-width: 25rem;
 
   display: flex;
   flex-direction: column;

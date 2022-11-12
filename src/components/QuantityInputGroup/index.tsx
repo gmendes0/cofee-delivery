@@ -1,18 +1,28 @@
 import { Minus, Plus } from "phosphor-react";
 import {
   QuantityButton,
-  QuantityInput,
+  // QuantityInput,
   QuantityInputGroupContainer,
 } from "./styles";
 
-export function QuantityInputGroup() {
+interface QuantityInputGroupProps {
+  amount: number;
+  onIncrement: () => void;
+  onDecrement: () => void;
+}
+
+export function QuantityInputGroup({
+  amount = 1,
+  onDecrement,
+  onIncrement,
+}: QuantityInputGroupProps) {
   return (
     <QuantityInputGroupContainer>
-      <QuantityButton type="button">
+      <QuantityButton type="button" onClick={onDecrement}>
         <Minus weight="bold" />
       </QuantityButton>
-      <QuantityInput type="number" min={1} max={9} step={1} value={1} />
-      <QuantityButton type="button">
+      <span>{amount}</span>
+      <QuantityButton type="button" onClick={onIncrement}>
         <Plus weight="bold" />
       </QuantityButton>
     </QuantityInputGroupContainer>

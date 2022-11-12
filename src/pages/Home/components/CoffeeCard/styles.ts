@@ -18,6 +18,7 @@ export const CoffeeCardContainer = styled.div`
     list-style: none;
 
     display: flex;
+    justify-content: center;
     flex-direction: row;
     gap: 0.25rem;
     max-width: 256px;

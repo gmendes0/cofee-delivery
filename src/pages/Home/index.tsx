@@ -1,77 +1,88 @@
-import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react";
-
-import coverSVG from "../../assets/cover.png";
-import { RoundedIcon } from "../../components/RoudedIcon";
+import { useEffect, useState } from "react";
 import { CoffeeCard } from "./components/CoffeeCard";
-import {
-  Badge,
-  BadgesContainer,
-  CoffeeListContainer,
-  Cover,
-  CoverContainer,
-  MainContainer,
-  TitleContainer,
-} from "./styles";
+import { Cover } from "./components/Cover";
+import { CoffeeListContainer, MainContainer } from "./styles";
+import { products as mockedProducts } from "../../../products";
 
+interface ProductsResponse {
+  data: Array<{
+    id: string;
+    description: string;
+    default_price: {
+      id: string;
+      unit_amount: number;
+      currency: string;
+    };
+    images: string[];
+    metadata: {
+      categories: string;
+    };
+    name: string;
+  }>;
+}
+
+interface Product {
+  id: string;
+  description: string;
+  image_url: string;
+  price: {
+    amount: number;
+    formatted: {
+      currency: string;
+      amount: string;
+    };
+  };
+  categories: string[];
+  name: string;
+}
+
+/**
+ * @todo Show something when has no products
+ */
 export function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    // API
+    // useEffect
+
+    const productsFromAPI: ProductsResponse = mockedProducts;
+
+    const formattedProducts = productsFromAPI.data.map((product): Product => {
+      const price = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).formatToParts(product.default_price.unit_amount / 100);
+
+      return {
+        id: product.id,
+        description: product.description,
+        image_url: product.images[0],
+        categories: product.metadata.categories.split(","),
+        name: product.name,
+        price: {
+          amount: product.default_price.unit_amount / 100,
+          formatted: {
+            currency: price[0].value,
+            amount: [price[2].value, price[3].value, price[4].value].join(""),
+          },
+        },
+      };
+    });
+
+    setProducts(formattedProducts);
+  }, []);
+
   return (
     <>
-      <CoverContainer>
-        <div>
-          <div>
-            <TitleContainer>
-              <h1>Encontre o café perfeito para qualquer hora do dia</h1>
-              <p>
-                Com o Coffee Delivery você recebe seu café onde estiver, a
-                qualquer hora
-              </p>
-            </TitleContainer>
-
-            <BadgesContainer>
-              <Badge>
-                <RoundedIcon
-                  icon={<ShoppingCart weight="fill" />}
-                  background="yellow-700"
-                />{" "}
-                Compra simples e segura
-              </Badge>
-
-              <Badge>
-                <RoundedIcon
-                  icon={<Package weight="fill" />}
-                  background="gray-600"
-                />{" "}
-                Embalagem mantém o café intacto
-              </Badge>
-
-              <Badge>
-                <RoundedIcon
-                  icon={<Timer weight="fill" />}
-                  background="yellow-500"
-                />
-                Entrega rápida e rastreada
-              </Badge>
-
-              <Badge>
-                <RoundedIcon
-                  icon={<Coffee weight="fill" />}
-                  background="purple-500"
-                />{" "}
-                O café chega fresquinho até você
-              </Badge>
-            </BadgesContainer>
-          </div>
-
-          <Cover src={coverSVG} alt="" />
-        </div>
-      </CoverContainer>
+      <Cover />
 
       <MainContainer>
         <h2>Nossos cafés</h2>
 
         <CoffeeListContainer>
-          {[...new Array(50)].map((e, key) => (
-            <CoffeeCard n={key} />
+          {products.map((product) => (
+            <CoffeeCard key={product.id} product={product} />
           ))}
         </CoffeeListContainer>
       </MainContainer>

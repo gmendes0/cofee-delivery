@@ -1,25 +1,63 @@
 import { Trash } from "phosphor-react";
+import { useContext } from "react";
 import { QuantityInputGroup } from "../../../../components/QuantityInputGroup";
+import { CartContext } from "../../../../contexts/CartContext";
 import { CartItemCard, CartItemCardActions } from "./styles";
 
-export function CartItem() {
+interface CartItemProps {
+  price: {
+    id: string;
+    formatted_price: string;
+    unit_amount: number;
+    product: {
+      id: string;
+      image_url: string;
+      name: string;
+      amount: number;
+    };
+  };
+}
+
+export function CartItem({ price }: CartItemProps) {
+  const {
+    onIncrementProductAmount,
+    onDecrementProductAmount,
+    onRemoveProduct,
+  } = useContext(CartContext);
+
+  function handleIncrementProductAmount() {
+    onIncrementProductAmount(price.product.id);
+  }
+
+  function handleDecrementProductAmount() {
+    onDecrementProductAmount(price.product.id);
+  }
+
+  function handleRemoveFromCart() {
+    onRemoveProduct(price.product.id);
+  }
+
   return (
     <CartItemCard>
-      <img src="/coffee.png" alt="" />
+      <img src={price.product.image_url} alt="" />
 
       <div>
-        <span>Expresso Tradicional</span>
+        <span>{price.product.name}</span>
 
         <CartItemCardActions>
-          <QuantityInputGroup />
+          <QuantityInputGroup
+            amount={price.product.amount}
+            onIncrement={handleIncrementProductAmount}
+            onDecrement={handleDecrementProductAmount}
+          />
 
-          <button type="button">
+          <button type="button" onClick={handleRemoveFromCart}>
             <Trash /> Remover
           </button>
         </CartItemCardActions>
       </div>
 
-      <span>R$ 9,90</span>
+      <span>{price.formatted_price}</span>
     </CartItemCard>
   );
 }
