@@ -49,7 +49,7 @@ export const CheckoutDataAddress = styled.div`
   grid-template-columns: 28% auto 09.333333333333334%;
   gap: 1rem 0.75rem;
 
-  input {
+  /* input {
     padding: 0.75rem;
     border-radius: 4px;
     background-color: ${(props) => props.theme["gray-200"]};
@@ -67,7 +67,7 @@ export const CheckoutDataAddress = styled.div`
     &:focus {
       outline-color: ${(props) => props.theme["yellow-700"]};
     }
-  }
+  } */
 
   @media screen and (max-width: 768px) {
     grid-template-areas:

@@ -7,6 +7,8 @@ export const defaultTheme = {
   "purple-500": "#8047f8", // Brand/Purple
   "purple-700": "#4b2995",
 
+  "red-500": "#F56565",
+
   "gray-50": "#fafafa", // Base/Background
   "gray-100": "#f3f2f2", // Base/Card
   "gray-200": "#ededed", // Base/Input
