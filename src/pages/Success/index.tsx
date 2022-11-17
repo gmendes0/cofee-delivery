@@ -1,7 +1,11 @@
 import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import successIllustrationPNG from "../../assets/success-illustration.png";
 import { RoundedIcon } from "../../components/RoudedIcon";
+import { CartContext } from "../../contexts/CartContext";
+import { stripe } from "../../services/stripe";
 import {
   MainContentContainer,
   SuccessCard,
@@ -10,6 +14,19 @@ import {
 } from "./styles";
 
 export function Success() {
+  const { onClearCart } = useContext(CartContext);
+  const { session } = useParams();
+
+  useEffect(() => {
+    if (!session) return;
+
+    onClearCart();
+
+    stripe
+      .post(`/payment_links/${session}`, { active: false })
+      .catch((err) => console.log("Failed to deactivate payment link"));
+  }, [session]);
+
   return (
     <SuccessContainer>
       <MainContentContainer>

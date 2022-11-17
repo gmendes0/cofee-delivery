@@ -7,6 +7,9 @@ import { CheckoutAddress } from "./components/CheckoutAddress";
 import { CheckoutPaymentMethods } from "./components/CheckoutPaymentMethods";
 import { CartContainer, CheckoutDataContainer } from "./styles";
 import { useCallback, useEffect } from "react";
+import { stripe } from "../../services/stripe";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 const schema = z.object({
   zipcode: z
@@ -38,10 +41,44 @@ export function Cart() {
     resolver: zodResolver(schema),
   });
 
+  const { productAmountList } = useContext(CartContext);
+
   const { handleSubmit } = form;
 
   const handleSubmitCheckout: SubmitHandler<FormDataType> = (data) => {
     console.log(data);
+
+    console.log(
+      productAmountList.map((productAmount, i) => ({
+        line_items: [{ price: productAmount.price_id }],
+      }))
+    );
+
+    stripe
+      .post<{ url: string }>(
+        "/payment_links",
+        {},
+        {
+          params: {
+            line_items: productAmountList.map((productAmount, i) => ({
+              price: productAmount.price_id,
+              quantity: productAmount.amount,
+            })),
+            after_completion: {
+              type: "redirect",
+              redirect: {
+                url: `${
+                  import.meta.env.VITE_APP_URL
+                }/success?session={CHECKOUT_SESSION_ID}`,
+              },
+            },
+            // payment_method_types: ["card", "pix"],
+            allow_promotion_codes: true,
+          },
+        }
+      )
+      .then((response) => window.open(response.data.url, "_blank"))
+      .catch((err) => console.log("Failed to generate payment link"));
   };
 
   return (

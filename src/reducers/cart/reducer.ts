@@ -1,7 +1,8 @@
 import { Action, ActionTypes } from "./actions";
 
-interface ProductAmount {
+export interface ProductAmount {
   id: string;
+  price_id: string;
   amount: number;
 }
 
@@ -75,6 +76,10 @@ export function cartReducer(state: CartState, action: Action): CartState {
         productAmountList: state.productAmountList.filter(
           (productAmount) => productAmount.id !== action.payload.id
         ),
+      };
+    case ActionTypes.CLEAR_CART:
+      return {
+        productAmountList: [],
       };
     default:
       return state;

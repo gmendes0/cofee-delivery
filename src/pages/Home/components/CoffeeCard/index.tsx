@@ -22,6 +22,7 @@ interface Product {
   };
   categories: string[];
   name: string;
+  default_price_id: string;
 }
 
 interface CoffeeCardProps {
@@ -34,7 +35,7 @@ export function CoffeeCard({ product }: CoffeeCardProps) {
   const [amount, setAmount] = useState(1);
 
   function handleAddToCart() {
-    onAddToCart(product.id, amount);
+    onAddToCart(product.id, amount, product.default_price_id);
     setAmount(1);
   }
 
